@@ -1,0 +1,21 @@
+body {
+	padding-top: 10px;
+	font-family: Arial;
+}
+.row {
+	width: 500px;
+	margin: 0 auto;
+}
+a:link, a:visited {
+	color: slategray;
+	text-decoration: none;
+}
+a:hover {
+	color: #444;
+}
+p {
+	line-height: 20px;
+}
+h1 {
+	text-align: center;
+}
