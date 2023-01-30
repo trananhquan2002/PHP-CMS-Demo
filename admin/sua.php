@@ -3,15 +3,17 @@ require "./config/Database.php";
 if (isset($_GET["id"])) {
 	$id = $_GET["id"];
 }
-if (isset($_POST["sua"])) {
-	$Title = $_POST["title"];
-	$Message = $_POST["message"];
-	$Created = $_POST["created"];
-	$Updated = $_POST["updated"];
-	if ($Title != "" && $Message != "" && $Created != "" && $Updated != "") {
-		$sql = "UPDATE cms_posts INNER JOIN cms_category ON cms_posts.id = cms_category.id INNER JOIN cms_user ON cms_posts.id = cms_user.id SET cms_posts.title = '$Title', cms_posts.message = '$Message', cms_posts.created = '$Created', cms_posts.updated = '$Updated' WHERE cms_posts.id = $id";
-		$qr = $conn->exec($sql);
-		header("location: index.php");
+if (isset($_SESSION['username'], $_SESSION['password'])) {
+	if (isset($_POST["sua"])) {
+		$Title = $_POST["title"];
+		$Message = $_POST["message"];
+		$Created = $_POST["created"];
+		$Updated = $_POST["updated"];
+		if ($Title != "" && $Message != "" && $Created != "" && $Updated != "") {
+			$sql = "UPDATE cms_posts INNER JOIN cms_category ON cms_posts.id = cms_category.id INNER JOIN cms_user ON cms_posts.id = cms_user.id SET cms_posts.title = '$Title', cms_posts.message = '$Message', cms_posts.created = '$Created', cms_posts.updated = '$Updated' WHERE cms_posts.id = $id";
+			$qr = $conn->exec($sql);
+			header("location: index.php");
+		}
 	}
 }
 $sql = "SELECT title, message, cms_category.name, cms_user.fullname, cms_posts.status, cms_posts.created, cms_posts.updated FROM cms_posts INNER JOIN cms_category ON cms_posts.id = cms_category.id INNER JOIN cms_user ON cms_posts.id = cms_user.id WHERE cms_posts.id = $id";

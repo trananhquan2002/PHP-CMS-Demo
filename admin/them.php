@@ -1,19 +1,19 @@
 <?php
 require "./config/Database.php";
-?>
-<?php
-if (isset($_POST["them"])) {
-	$Title = $_POST["title"];
-	$Message = $_POST["message"];
-	$Category_id = $_POST["category_id"];
-	$Userid = $_POST["userid"];
-	$Status = $_POST["status"];
-	$Created = $_POST["created"];
-	$Updated = $_POST["updated"];
-	if ($Title != "" && $Message != "" && $Category_id != "" && $Userid != "" && $Status != "" && $Created != "" && $Updated != "") {
-		$sql = "INSERT INTO cms_posts(title, `message`, category_id, userid, `status`, created, updated) VALUES('$Title', '$Message', '$Category_id', '$Userid', '$Status', '$Created', '$Updated')";
-		$qr = $conn->exec($sql);
-		header("location: index.php");
+if (isset($_SESSION['username'], $_SESSION['password'])) {
+	if (isset($_POST["them"])) {
+		$Title = $_POST["title"];
+		$Message = $_POST["message"];
+		$Category_id = $_POST["category_id"];
+		$Userid = $_POST["userid"];
+		$Status = $_POST["status"];
+		$Created = $_POST["created"];
+		$Updated = $_POST["updated"];
+		if ($Title != "" && $Message != "" && $Category_id != "" && $Userid != "" && $Status != "" && $Created != "" && $Updated != "") {
+			$sql = "INSERT INTO cms_posts(title, `message`, category_id, userid, `status`, created, updated) VALUES('$Title', '$Message', '$Category_id', '$Userid', '$Status', '$Created', '$Updated')";
+			$qr = $conn->exec($sql);
+			header("location: index.php");
+		}
 	}
 }
 ?>
